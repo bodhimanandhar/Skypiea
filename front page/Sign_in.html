@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SIGN IN</title>
+        <link href="Intro.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body> 
+        <div class="container" id="main">
+            <div class="sign-up">
+            <form>
+                <label>First Name: </label>    <input type="Text" name="First_name" placeholder="John" required="">
+                <label>Last Name: </label>    <input type="Text" name="Last_name" placeholder="Doe" required="">
+                <label>Email: </label>    <input type="Text" name="Email" placeholder="John@gmail.com" required="">
+                <label>User Name: </label>    <input type="Text" name="User_name" placeholder="John123" required="">
+                <label>Password: </label>   <input type="Text" name="Password" placeholder="*****" required="">
+                
+
+                <button>Sign Up</button>
+            </form>
+        </div>
+        <div class="sign-in">
+            <form>
+                    
+                    <input type="email" placeholder="email" required="">
+                    <input type="password" placeholder="XXXXXX" required="">
+                    <button> Sign in</button>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-left">
+                    <h1>Join Us</h1>
+                    <button id="signIn">Sign in</button>
+                </div>
+                <div class="overlay-right">
+                    <h1>Welcome Back!!</h1>
+                    <button id="signUp">Sign Up</button>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            const signUpButton = document.getElementById('signUp');
+            const signInButton = document.getElementById('signIn');
+            const main = document.getElementById('main');
+        
+            signUpButton.addEventListener('click', () => {
+                main.classList.add("right-panel-active");
+            });
+        
+            signInButton.addEventListener('click', () => {
+                main.classList.remove("right-panel-active");
+            });
+        </script>
+        
+
+    </body>
+</html>
