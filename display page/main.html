@@ -11,27 +11,86 @@
 
 <div class="container">
     <div class="row">
-        <input type="text" placeholder="Search..">  
-        <button type="submit"><i class="fa fa-search"></i></button>
+        <div class="search">
+        <input type="text" placeholder="Search.." value="Kathmandu">  
+        <button type="submit" class="search_button"><i class="fa fa-search"></i></button>
     </div>
+</div>
+<div class="weather">
     <div class="row">
-        <i class='fas fa-sun sun-icon'></i> <!-- Using 'fas' from Font Awesome 5+ -->
-       
+        <div class="weather-info">
+        <i class='icon' id="weather-icon"></i> <!-- Using 'fas' from Font Awesome 5+ -->
+       <h1 class="city">Kathmandu</h1>
     </div>
-    <div class="row">
+    </div>
+    <div class="row1">
         <div class="column">
         <i class='fas fa-temperature-high'></i>
         <h1 class="temp">22°C</h1>
         </div>
-    </div>
-    <div class="row">
+        <div class="col"></div> <div class="col1"></div>
         <div class="column">
+            <i class="fa fa-flag" aria-hidden="true"></i>
+            <h1 class="wind">12</h1>
+        </div>
+        <div class="col"></div><div class="col1"></div>
+        <div class="column1">
         <i class="fas fa-tint"></i>
-
         <h1 class="humidity">45</h1>
         </div>
     </div>
 </div>
+</div>
+
+<script>
+       
+        const apiKey="d008c91393605f60cd977d9842c37beb";
+        const apiUrl="https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+
+        const searchBox=document.querySelector(".search input");
+        const searchBtn=document.querySelector(".search button");
+        const weatherIcon=document.querySelector(".weather-icon");
+        async function checkWeather(city){
+            const response= await fetch(apiUrl+city+`&appid=${apiKey}`);
+            var data=await response.json();
+            console.log(data);
+            const weatherIcon= document.getElementById("weather-icon");
+
+            document.querySelector(".city").innerHTML=data.name;
+            document.querySelector(".temp").innerHTML=Math.round(data.main.temp)+"°C";
+            document.querySelector(".humidity").innerHTML=data.main.humidity+"%";
+            document.querySelector(".wind").innerHTML=data.wind.speed+"km/h";
+
+            if (data.weather[0].main === "Clouds") {
+                    weatherIcon.className = 'icon fas fa-cloud'; // Cloud icon
+                } else if (data.weather[0].main === "Clear") {
+                    weatherIcon.className = 'icon fas fa-sun'; // Sun icon
+                } else if (data.weather[0].main === "Rain") {
+                    weatherIcon.className = 'icon fas fa-cloud-showers-heavy'; // Rain icon
+                } else {
+                    weatherIcon.className = 'icon fas fa-smog'; // Default icon for other conditions
+                }
+        }
+        searchBox.value = "Kathmandu";
+        checkWeather("Kathmandu");
+        searchBtn.addEventListener("click", ()=>{
+            checkWeather(searchBox.value);
+        })
+
+        searchBox.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            const city = searchBox.value.trim();
+            if (city) {
+                checkWeather(city);
+            } else {
+                alert("Please enter a city name.");
+            }
+        }
+    });
+    
+
+</script>
+ 
 
 </body>
 </html>
