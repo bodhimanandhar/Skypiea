@@ -54,17 +54,16 @@
 
 
             document.getElementById('button_signup').addEventListener('click', function(event) {
-                if (!document.getElementById('signup').checkValidity()) {
+            if (!document.getElementById('signup').checkValidity()) {
                     alert("Please fill out all required fields.");
                     return; 
-                 }
+            }
                  
             if (!validateForm()) {
             event.preventDefault(); // Prevent form submission if validation fails
-            } else {
-        
-            alert("Form is valid! Submitting...");
-     
+            } 
+            else {       
+                alert("Form is valid! Submitting...");
             }
             });
 
@@ -88,6 +87,10 @@
 
         return true; // Validation passed
         }
+
+        document.getElementById("button_signin").addEventListener("click", function() {
+        window.location.href = "nextpage.html";
+        });
 
         </script>
         
